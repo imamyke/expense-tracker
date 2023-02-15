@@ -1,0 +1,17 @@
+.chart {
+  margin: 0 auto;
+}
+.total-amount,
+.chart .title {
+  margin-top: 40px; 
+  top: 50%; 
+  left: 50%; 
+  font-size: 24px;
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+  z-index: 999
+}
+.chart .title {
+  margin-top: 10px; 
+  font-size: 16px;
+}

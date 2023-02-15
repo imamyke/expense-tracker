@@ -1,0 +1,125 @@
+.expense-container {
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 3px 30px rgba(0,0,0,0.3);
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* index */
+.record{
+  /* 讓表格不換行 => 資料持續寫下去 */
+  white-space: nowrap;
+  /* 表個貼齊寬度 */
+  width: 100%;
+  /* 表格貼齊 */
+  border-collapse: collapse;
+}
+.record-inner {
+  max-height: 300px;
+  overflow: hidden;
+  overflow: scroll;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+}
+/* Scroll bar =>這兩個要一起用! scrollbar-thumb 才有效!*/
+.record-inner::-webkit-scrollbar{
+  width: 5px;
+}
+.record-inner::-webkit-scrollbar-thumb{
+  border-radius: 5px;
+  background-color: #aaaaaa;
+}
+.record-inner::-webkit-scrollbar-corner{
+  border-radius: 4px;
+}
+.record td {
+  padding: 4px;
+  line-height: 32px;
+  text-align: center;
+}
+.record a:hover i:before {
+  transition: all 0.3s;
+}
+.record a:hover i:before {
+  color: #dddddd;
+}
+
+/* new */
+.category-container select {
+  width: 240px;
+  margin: 0 auto;
+  padding: 4px 28px;
+}
+
+.expense-container ::placeholder{
+  color: #aaa;
+}
+.expense-container input {
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  background-color: #efefef;
+  line-height: 48px;
+  /* 輸入框的高度=>文字會在中間 */
+  padding: 0 40px;
+  /* 數入框的內距=>文字不貼齊 */
+  width: 100%;
+  border-radius: 4px;
+  color:#333;
+  /* 輸入文字的顏色 */
+  border: 1px solid #efefef;
+  /* 給個預設border，:focus才可改變 */
+}
+.expense-container input:focus {
+  outline: none;
+  border-color: #38B591;
+}
+.expense-container .form-item {
+  margin-bottom: 16px;
+  position: relative;
+}
+.expense-container .form-item:last-child {
+  margin-bottom: 0px;
+}
+.expense-container .form-item i {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translate(-50%,-50%); 
+  z-index: 99;
+  /* 會被html的input蓋掉 */
+  font-size: 16px;
+  color:#aaa
+}
+
+.expense-container td {
+  border: 1px solid #dddddd;
+}
+
+.expense-container form.was-validated input:invalid {
+  border-bottom: 1px solid red;
+}
+.expense-container form.was-validated input:valid {
+  border-bottom: 1px solid green;
+}
+.expense-container .invalid-feedback,
+.expense-container .valid-feedback {
+  display: none;
+  font-size: 0.8em;
+}
+.expense-container .invalid-feedback {
+  color: red
+}
+.expense-container .valid-feedback {
+  color: green
+}
+.expense-container form.was-validated .form-control:invalid ~ .invalid-feedback,
+.expense-container form.was-validated .form-control:valid ~ .valid-feedback {
+  display: initial;   /* 顯示 */
+}
+.expense-container form.was-validated .form-select:invalid ~ .invalid-feedback,
+.expense-container form.was-validated .form-select:valid ~ .valid-feedback {
+  display: initial;   /* 顯示 */
+}

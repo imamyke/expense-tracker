@@ -1,0 +1,45 @@
+<div class="expense-container mt-4">
+  {{!-- category --}}
+  <div class="category-container">
+    <form action="/category">
+      <select onchange="this.form.submit()" name="category" class="form-select form-select-lg" aria-label=".form-select-lg example">
+        <option value="all" selected>全部</option>
+        <option {{#is keySelected '家居物業' }} selected {{/is}}>家居物業</option>
+        <option {{#is keySelected '交通出行' }} selected {{/is}}>交通出行</option>
+        <option {{#is keySelected '休閒娛樂' }} selected {{/is}}>休閒娛樂</option>
+        <option {{#is keySelected '餐飲食品' }} selected {{/is}}>餐飲食品</option>
+        <option {{#is keySelected '其他' }} selected {{/is}}>其他</option>
+
+      </select>
+    </form>
+  </div>
+  {{!-- total amount --}}
+  {{>chart}}
+  {{!-- expense record --}}
+  <div class="record-table">
+    <div class="container">
+      <div class="record-inner">
+        <table class="record">
+          {{#each records}}
+              <tr>
+                <td><i class="{{ this.category }}"></i></td>
+                <td>{{ this.name }}</td>
+                <td>{{ this.date }}</td>
+                <td>{{ this.amount }}</td>
+                <td class="d-flex justify-content-around">
+                  <a href="/expenses/{{ this._id }}/edit">
+                    <i class="fa-solid fa-pencil text-secondary"></i>
+                  </a>
+                  <form action="/expenses/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" style="padding: 0; border: 0; background-color: transparent;">
+                      <i class="fa-solid fa-trash-can text-secondary text-end"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+          {{/each}}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

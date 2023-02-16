@@ -6,7 +6,8 @@ const dateFormat = require('../../dateFormat')
 
 // 瀏覽 + 處理 Icon + 計算總金額
 router.get('/', (req,res) => {
-  Record.find()
+  const userId = req.user._id
+  Record.find({ userId })
     .lean()
     .then(defaultRecords => {
       Category.find()
@@ -39,7 +40,8 @@ router.get('/category', (req,res) => {
   if(category === 'all') {
     return res.redirect('/')
   }
-  Record.find({ category })
+  const userId = req.user._id
+  Record.find({ category, userId })
     .lean() 
     .then(defaultRecords => {
       Category.find()

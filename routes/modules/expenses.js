@@ -9,6 +9,7 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 router.post('/', (req, res) => {
+  const userId = req.user._id
   let categoryId = ''
   Category.find()
     .lean()
@@ -16,7 +17,7 @@ router.post('/', (req, res) => {
       const TargetCategory = categories.find(category => category.name === req.body.category)
       categoryId = TargetCategory._id
       console.log(categoryId)
-      return Record.create({ ...req.body, categoryId })
+      return Record.create({ ...req.body, categoryId, userId })
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     })
@@ -26,7 +27,8 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   // const userId = req.user._id     
   const _id = req.params.id
-  Record.findOne({ _id })
+  const userId = req.user._id
+  Record.findOne({ _id, userId })
     .lean() // 把資料轉換成單純的 "JS 物件"
     .then(record => {
       // 轉換日期格式
@@ -46,18 +48,18 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {
-  // const userId = req.user._id
+  const userId = req.user._id
   const _id = req.params.id // 字串
-  return Record.findOneAndUpdate({ _id }, req.body)
+  return Record.findOneAndUpdate({ _id, userId }, req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 // 刪除
 router.delete('/:id', (req, res) => {
-  // const userId = req.user._id
+  const userId = req.user._id
   const _id = req.params.id
-  return Record.findOne({ _id })
+  return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

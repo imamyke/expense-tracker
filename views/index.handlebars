@@ -1,5 +1,5 @@
 <div class="expense-container mt-4">
-  <span class="username mt-3">您好，葛思宇</span>
+  {{#if isAuthenticated}}<span class="username mt-3">您好，{{ user.name }}</span>{{/if}}
   <a href="/users/logout" class="indexlogout-btn mt-4">
     <i class="fa-solid fa-right-from-bracket"></i>
   </a>

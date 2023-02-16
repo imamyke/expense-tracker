@@ -111,10 +111,9 @@
   color: #B2B2B2;
 }
 
-
 /* add-btn */
 .expense-container .add-container {
-  position: fixed;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   padding: 16px 0;

@@ -6,14 +6,14 @@
     <h4 class="signup__title">Sign in</h4>
     <p class="signup__para signup__para--sm">You can sign in with Facebook or Google</p>
     <div class="social-btns">
-      <a href="#!" class="social-btns__item">
+      <a href="/auth/facebook" class="social-btns__item">
         <i class="fab fa-facebook-f"></i>
       </a>
       <a href="#!" class="social-btns__item">
         <i class="fab fa-google-plus-g"></i>
       </a>
     </div>
-    <form action="/login" class="form">
+    <form action="/users/login" method="POST" class="form">
       <p class="signup__para signup__para--sm or-line">or</p>
       <div class="input_group form__item">
         <i class="far fa-envelope"></i>
@@ -28,7 +28,7 @@
       </div>
     </form>
     <div class="option">
-      <span class="question">Need an account?<a class="change-link" href="#!">Sign up</a></span>
+      <span class="question">Need an account?<a class="change-link" href="/users/signup">Sign up</a></span>
     </div>
   </div>
   <div class="footer">

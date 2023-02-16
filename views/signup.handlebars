@@ -6,37 +6,38 @@
     <h4 class="signup__title">Sign up</h4>
     <p class="signup__para signup__para--sm">You can sign up with Facebook or Google</p>
     <div class="social-btns">
-      <a href="#!" class="social-btns__item">
+      <a href="/auth/facebook" class="social-btns__item">
         <i class="fab fa-facebook-f"></i>
       </a>
       <a href="#!" class="social-btns__item">
         <i class="fab fa-google-plus-g"></i>
       </a>
     </div>
-    <form action="/login" class="form">
+    <form action="/users/signup" method="POST" class="form">
       <p class="signup__para signup__para--sm or-line">or</p>
       <div class="input_group form__item">
         <i class="far fa-user"></i>
-        <input type="text" placeholder="Name">
+        <input type="text" name="name" placeholder="Name" value="{{ name }}">
       </div>
       <div class="input_group form__item">
         <i class="far fa-envelope"></i>
-        <input type="email" placeholder="Email">
+        <input type="email" name="email" placeholder="Email" value="{{ email }}">
       </div>
       <div class="input_group form__item">
         <i class="fas fa-unlock-alt"></i>
-        <input type="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password" value="{{ password }}">
       </div>
       <div class="input_group form__item">
         <i class="fas fa-unlock-alt"></i>
-        <input type="password" placeholder="Confirm your password">
+        <input type="password" name="confirmPassword" placeholder="Confirm your password" value="{{ confirmPassword }}">
       </div>
       <div class="input_group form__item form__item--center">
         <input class="btn btn--primary" type="submit" value="SIGN UP">
       </div>
     </form>
+    
     <div class="option">
-      <span class="question">Already have an account?<a class="change-link" href="#!">Sign in</a></span>
+      <span class="question">Already have an account?<a class="change-link" href="/users/login">Sign in</a></span>
     </div>
   </div>
   <div class="footer">

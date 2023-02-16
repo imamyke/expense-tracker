@@ -112,6 +112,7 @@
 	border-radius: 4px;
 	color: #333;
 	border: 1px solid #efefef;
+	font-size: 14px;
 }
 .login-container input[type="text"]:focus,
 .login-container input[type="password"]:focus,

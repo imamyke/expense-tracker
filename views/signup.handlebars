@@ -15,6 +15,7 @@
     </div>
     <form action="/users/signup" method="POST" class="form">
       <p class="signup__para signup__para--sm or-line">or</p>
+      {{> message}}
       <div class="input_group form__item">
         <i class="far fa-user"></i>
         <input type="text" name="name" placeholder="Name" value="{{ name }}">

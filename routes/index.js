@@ -12,6 +12,5 @@ router.use('/expenses', authenticator, expenses)
 router.use('/users', users)
 // router.use('/auth', auth)
 router.use('/', authenticator, home)
-router.use('/', home)
 
 module.exports = router

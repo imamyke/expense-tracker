@@ -15,8 +15,13 @@ router.post('/', (req, res) => {
     .lean()
     .then(categories => {
       const TargetCategory = categories.find(category => category.name === req.body.category)
+      // 從這開始
+      if (!TargetCategory) {
+        req.flash('select_msg')
+        res.render('new')
+        return
+      }
       categoryId = TargetCategory._id
-      console.log(categoryId)
       return Record.create({ ...req.body, categoryId, userId })
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))

@@ -12,6 +12,13 @@
   </button>
 </div>
 {{/if}}
+{{#if select_msg}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  請確認欄位已確實填寫完畢!{{{select_msg}}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+  </button>
+</div>
+{{/if}}
 {{#if error }}
 {{#each error}}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">

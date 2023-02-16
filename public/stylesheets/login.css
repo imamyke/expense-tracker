@@ -1,12 +1,12 @@
 .login-container {
   position: relative;
   max-width: 600px;
-  margin: 0 auto;
   width: 600px;
-  height: 100%;
+  margin: 0 auto;
+  box-shadow: 0 3px 30px rgba(0,0,0,0.3);
+  height: 830px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 3px 30px rgba(0,0,0,0.3);
 }
 /*------------------------------------*\
     Components
@@ -176,7 +176,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
 	height: 100%;
 }
 .signup__title{
@@ -197,8 +197,11 @@
 
 /* footer */
 .login-container .footer {
-  margin-top: 100px;
-  padding: 30px 0 16px 20px ;
+  position: relative;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin-top: 80px;
 }
 .login-container .footer .para {
   margin: 0;
@@ -209,6 +212,7 @@
 
 /* Option */
 .option {
+  position: relative;
   margin-top: 10px;
 }
 .option .question {

@@ -2,14 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-
-const dateFormat = (date) => {
-  let formattedDate = `${ date.getFullYear() }`+`.${ date.getMonth() + 1 }`+`.${ date.getDate() }`
-  return formattedDate;
-}
+const dateFormat = require('../../dateFormat')
 
 // 瀏覽 + 處理 Icon + 計算總金額
-
 router.get('/', (req,res) => {
   Record.find()
     .lean()
@@ -40,6 +35,10 @@ router.get('/', (req,res) => {
 
 router.get('/category', (req,res) => {
   const category = req.query.category 
+  // 若 category 為全部 => 導回首頁
+  if(category === 'all') {
+    return res.redirect('/')
+  }
   Record.find({ category })
     .lean() 
     .then(defaultRecords => {

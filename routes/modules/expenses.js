@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
+const dateValue = require('../../dateValue')
 
 // 新增
 router.get('/new', (req, res) => {
@@ -23,11 +24,25 @@ router.post('/', (req, res) => {
 })
 // 編輯
 router.get('/:id/edit', (req, res) => {
-  // const userId = req.user._id
+  // const userId = req.user._id     
   const _id = req.params.id
   Record.findOne({ _id })
     .lean() // 把資料轉換成單純的 "JS 物件"
-    .then(record => res.render('edit', { record }))
+    .then(record => {
+      // 轉換日期格式
+      const recordDate = dateValue(record.date)
+      // 導入類別
+      const selected = {
+            '家居物業': false,
+            '交通出行': false,
+            '休閒娛樂': false,
+            '餐飲食品': false,
+            '其他': false,
+          }
+      const keySelected = Object.keys(selected).find(key => key === record.category)
+      selected[`${keySelected}`] = true
+      res.render('edit', { record, recordDate, keySelected })
+    })
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {

@@ -1,15 +1,19 @@
 <div class="expense-container mt-4">
+  <span class="username mt-3">您好，葛思宇</span>
+  <a href="/users/logout" class="indexlogout-btn mt-4">
+    <i class="fa-solid fa-right-from-bracket"></i>
+  </a>
   {{!-- category --}}
-  <div class="category-container">
+  <div class="category-container mt-4">
     <form action="/category">
-      <select onchange="this.form.submit()" name="category" class="form-select form-select-lg" aria-label=".form-select-lg example">
+      <select onchange="this.form.submit()" name="category" class="form-select-lg form-select"
+        aria-label=".form-select-lg example">
         <option value="all" selected>全部</option>
         <option {{#is keySelected '家居物業' }} selected {{/is}}>家居物業</option>
         <option {{#is keySelected '交通出行' }} selected {{/is}}>交通出行</option>
         <option {{#is keySelected '休閒娛樂' }} selected {{/is}}>休閒娛樂</option>
         <option {{#is keySelected '餐飲食品' }} selected {{/is}}>餐飲食品</option>
         <option {{#is keySelected '其他' }} selected {{/is}}>其他</option>
-
       </select>
     </form>
   </div>
@@ -17,28 +21,48 @@
   {{>chart}}
   {{!-- expense record --}}
   <div class="record-table">
-    <div class="container">
+    <div class="container px-4">
+      <div class="record-title-inner">
+        <table class="record-title">
+          <tr>
+            <th style="width: 10%;">類別</th>
+            <th style="width: 35%;">項目</th>
+            <th style="width: 20%;">日期</th>
+            <th style="width: 20%;">
+              <i class="fa-solid fa-sack-dollar text-secondary"></i>
+            </th>
+            <th class="d-flex justify-content-around">
+              更動
+            </th>
+          </tr>
+        </table>
+      </div>
       <div class="record-inner">
         <table class="record">
           {{#each records}}
-              <tr>
-                <td><i class="{{ this.category }}"></i></td>
-                <td>{{ this.name }}</td>
-                <td>{{ this.date }}</td>
-                <td>{{ this.amount }}</td>
-                <td class="d-flex justify-content-around">
-                  <a href="/expenses/{{ this._id }}/edit">
-                    <i class="fa-solid fa-pencil text-secondary"></i>
-                  </a>
-                  <form action="/expenses/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-                    <button type="submit" style="padding: 0; border: 0; background-color: transparent;">
-                      <i class="fa-solid fa-trash-can text-secondary text-end"></i>
-                    </button>
-                  </form>
-                </td>
-              </tr>
+            <tr>
+              <td style="width: 10%;"><i class="{{ this.category }}"></i></td>
+              <td style="width: 35%;">{{ this.name }}</td>
+              <td style="width: 20%;">{{ this.date }}</td>
+              <td style="width: 20%;">${{ this.amount }}</td>
+              <td class="d-flex justify-content-around">
+                <a href="/expenses/{{ this._id }}/edit">
+                  <i class="fa-solid fa-pencil text-secondary"></i>
+                </a>
+                <form action="/expenses/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                  <button type="submit" style="padding: 0; border: 0; background-color: transparent;">
+                    <i class="fa-solid fa-trash-can text-secondary text-end"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
           {{/each}}
         </table>
+      </div>
+      <div class="add-container text-center">
+        <a href="/expenses/new" class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </a>
       </div>
     </div>
   </div>

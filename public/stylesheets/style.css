@@ -1,27 +1,176 @@
 .expense-container {
+  position: relative;
   max-width: 600px;
+  width: 600px;
   margin: 0 auto;
   box-shadow: 0 3px 30px rgba(0,0,0,0.3);
-  height: 100%;
+  height: 830px;
   border-radius: 8px;
   overflow: hidden;
 }
 
+/* category-container */
+.category-container select {
+  width: 128px;
+  height: 40px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 20px;
+  padding-right: 20px;
+  border: 2px solid #333;
+}
+.category-container .form-select:focus {
+  border: 2px solid #333;
+  box-shadow: none;
+}
+.category-container select option {
+  text-align: start;
+}
+
+/* form-item select */
+.form-container .form-item select {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 32px;
+}
+.form-container .form-item select:focus {
+  border: 1px solid #aaa;
+  box-shadow: none;
+}
+/* form-item button */
+.form-container .form-item button {
+  font-size: 16px;
+  line-height: 30px;
+  border: none;
+  padding: 8px 32px;
+  border-radius: 28px;
+  transition: all 0.3s;
+}
+.form-container .form-item button:hover {
+  transform: scale(1.1);
+}
+
+/* logout-btn & lastpage-btn */
+.expense-link {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 60px;
+}
+.expense-link h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.expense-link .logout-btn,
+.expense-link .lastpage-btn {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.expense-link .logout-btn i,
+.expense-link .lastpage-btn i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #333;
+}
+/* indexlogout-btn */
+.indexlogout-btn {
+  position: absolute;
+  right: 30px;
+  display: inline-block;
+  vertical-align: top;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.indexlogout-btn i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #333;
+}
+
+/* username */
+.username {
+  position: absolute;
+  left: 30px;
+  font-size: 14px;
+  color: #B2B2B2;
+}
+
+
+/* add-btn */
+.expense-container .add-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 0;
+}
+.expense-container .add-container .add-btn {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  text-decoration: none;
+  background-color: #F2CD5C;
+  transition: all 0.3s;
+}
+.expense-container .add-container .add-btn i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: #fff;
+}
+.expense-container .add-container .add-btn:hover {
+  transform: translateY(-3px);
+}
+
 /* index */
-.record{
+.record-table {
+  position: relative;
+}
+
+.record, .record-title{
+  position: relative;
   /* 讓表格不換行 => 資料持續寫下去 */
   white-space: nowrap;
   /* 表個貼齊寬度 */
   width: 100%;
   /* 表格貼齊 */
   border-collapse: collapse;
+  table-layout: fixed;
 }
 .record-inner {
-  max-height: 300px;
+  position: relative;
+  max-height: 280px;
   overflow: hidden;
-  overflow: scroll;
-  border-radius: 10px;
-  border: 1px solid #dddddd;
+  overflow-y: scroll;
+  border-radius: 0  0 10px 10px;
+  border: 2px solid #000;
+  border-top: 0;
+}
+.record-title-inner {
+  border: 2px solid #000;
+  border-radius: 10px 10px 0px 0px;
+  padding-right: 4px;
 }
 /* Scroll bar =>這兩個要一起用! scrollbar-thumb 才有效!*/
 .record-inner::-webkit-scrollbar{
@@ -34,28 +183,25 @@
 .record-inner::-webkit-scrollbar-corner{
   border-radius: 4px;
 }
-.record td {
+.record td,
+.record-title th {
   padding: 4px;
   line-height: 32px;
   text-align: center;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
 }
-.record a:hover i:before {
+.record a:hover i:before,
+.record button:hover i:before {
   transition: all 0.3s;
 }
-.record a:hover i:before {
+.record a:hover i:before,
+.record button:hover i:before {
   color: #dddddd;
 }
 
 /* new */
-.category-container select {
-  width: 240px;
-  margin: 0 auto;
-  padding: 4px 28px;
-}
 
-.expense-container ::placeholder{
-  color: #aaa;
-}
 .expense-container input {
   display: inline-block;
   vertical-align: middle;
@@ -74,10 +220,10 @@
 }
 .expense-container input:focus {
   outline: none;
-  border-color: #38B591;
+  border-color: none;
 }
 .expense-container .form-item {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   position: relative;
 }
 .expense-container .form-item:last-child {
@@ -94,32 +240,16 @@
   color:#aaa
 }
 
-.expense-container td {
-  border: 1px solid #dddddd;
-}
-
+/* form validated */
 .expense-container form.was-validated input:invalid {
-  border-bottom: 1px solid red;
+  border: 1px solid red;
 }
 .expense-container form.was-validated input:valid {
-  border-bottom: 1px solid green;
+  border: 1px solid green;
 }
-.expense-container .invalid-feedback,
-.expense-container .valid-feedback {
-  display: none;
-  font-size: 0.8em;
+.expense-container form.was-validated select:invalid {
+  border: 1px solid red;
 }
-.expense-container .invalid-feedback {
-  color: red
-}
-.expense-container .valid-feedback {
-  color: green
-}
-.expense-container form.was-validated .form-control:invalid ~ .invalid-feedback,
-.expense-container form.was-validated .form-control:valid ~ .valid-feedback {
-  display: initial;   /* 顯示 */
-}
-.expense-container form.was-validated .form-select:invalid ~ .invalid-feedback,
-.expense-container form.was-validated .form-select:valid ~ .valid-feedback {
-  display: initial;   /* 顯示 */
+.expense-container form.was-validated select:valid {
+  border: 1px solid green;
 }

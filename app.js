@@ -11,12 +11,12 @@ const helpers = require('handlebars-helpers')
 const multihelpers = helpers();
 
 // 載入 Session
-// const session = require('express-session')
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true
-// }))
+const session = require('express-session')
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
 
 // Mongoose(資料庫)連線
 require('./config/mongoose')

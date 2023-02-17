@@ -3,6 +3,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 const dateFormat = require('../../dateFormat')
+const calculateTotalAmount = require('../../calculateTotalAmount')
 
 // 瀏覽 + 處理 Icon + 計算總金額
 router.get('/', (req,res) => {
@@ -13,16 +14,12 @@ router.get('/', (req,res) => {
       Category.find()
       .lean()
       .then(categories => {
-          chartData = defaultRecords
           // 計算總金額
-          let totalAmount = 0
-          for (let defaultRecord of defaultRecords) {
-            totalAmount += defaultRecord.amount
-          }
+          const totalAmount = calculateTotalAmount(defaultRecords)
+          
+          // 時間格式轉換 & 處理 Icon
           const records = defaultRecords.map(defaultRecord => {
-            // 時間格式轉換
             const newDate = dateFormat(defaultRecord.date)
-            // 處理 Icon
             const category = categories.find(category => category.name === defaultRecord.category)
             defaultRecord.date = newDate
             defaultRecord.category = category.icon
@@ -60,14 +57,11 @@ router.get('/category', (req,res) => {
           selected[`${keySelected}`] = true
           
           // 計算總金額
-          let totalAmount = 0
-          for (let defaultRecord of defaultRecords) {
-            totalAmount += defaultRecord.amount
-          }
+          const totalAmount = calculateTotalAmount(defaultRecords)
+          
+          // 時間格式轉換 & 處理 Icon
           const records = defaultRecords.map(defaultRecord => {
-            // 時間格式轉換
             const newDate = dateFormat(defaultRecord.date)
-            // 處理 Icon
             const categorySelected = categories.find(category => category.name === defaultRecord.category)
             defaultRecord.date = newDate
             defaultRecord.category = categorySelected.icon

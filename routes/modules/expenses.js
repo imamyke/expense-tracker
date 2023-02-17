@@ -14,10 +14,10 @@ router.post('/', (req, res) => {
   Category.find()
     .lean()
     .then(categories => {
-      const targetCategory = categories.find(category => category.name === req.body.category)
-      const errors = []
       const form = req.body
-      if (!form.name || !form.date || !targetCategory || !form.date || !form.amount) {
+      const errors = []
+      const targetCategory = categories.find(category => category.name === form.category)
+      if (!form.name || !form.date || !targetCategory || !form.amount) {
         errors.push({ message: '請確認欄位已確實填寫完畢!' })
         return res.render('new', { ...form, errors})
       }
@@ -37,26 +37,55 @@ router.get('/:id/edit', (req, res) => {
     .then(record => {
       // 轉換日期格式
       const recordDate = dateValue(record.date)
+      record.date = recordDate
       // 導入類別
       const selected = {
             '家居物業': false,
             '交通出行': false,
             '休閒娛樂': false,
             '餐飲食品': false,
-            '其他': false,
+            '其他': false
           }
       const keySelected = Object.keys(selected).find(key => key === record.category)
       selected[`${keySelected}`] = true
-      res.render('edit', { record, recordDate, keySelected })
+      res.render('edit', { _id ,record, keySelected })
     })
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {
-  const userId = req.user._id
   const _id = req.params.id 
-  return Record.findOneAndUpdate({ _id, userId }, req.body)
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+  const userId = req.user._id
+// 從這邊開始
+  Category.find()
+      .lean()
+      .then(categories => {
+          const form = req.body
+          const errors = []
+          const targetCategory = categories.find(category => category.name === form.category)
+          if (!form.name || !form.date || !targetCategory || !form.amount) {
+            const record = form
+            // 導入類別
+            const selected = {
+              '家居物業': false,
+              '交通出行': false,
+              '休閒娛樂': false,
+              '餐飲食品': false,
+              '其他': false
+            }
+            const keySelected = Object.keys(selected).find(key => key === record.category)
+            if (!keySelected) {
+              errors.push({ message: '請確認欄位已確實填寫完畢!' })
+              return res.render('edit', { _id , record, errors, keySelected: false })
+            }
+            selected[`${keySelected}`] = true
+            errors.push({ message: '請確認欄位已確實填寫完畢!' })
+            return res.render('edit', { _id ,record, keySelected, errors })
+          }
+        return Record.findOneAndUpdate({ _id, userId }, req.body)
+                .then(() => res.redirect('/'))
+                .catch(error => console.log(error))
+      })
+      .catch(error => console.log(error))
 })
 
 // 刪除

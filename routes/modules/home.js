@@ -13,6 +13,7 @@ router.get('/', (req,res) => {
       Category.find()
       .lean()
       .then(categories => {
+          chartData = defaultRecords
           // 計算總金額
           let totalAmount = 0
           for (let defaultRecord of defaultRecords) {
@@ -26,7 +27,7 @@ router.get('/', (req,res) => {
             defaultRecord.date = newDate
             defaultRecord.category = category.icon
             return defaultRecord
-        })
+          })
           return res.render('index', { records, totalAmount })
       })
       .catch(error => console.error(error))

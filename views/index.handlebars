@@ -18,7 +18,7 @@
     </form>
   </div>
   {{!-- total amount --}}
-  {{>chart}}
+  {{> chart}}
   {{!-- expense record --}}
   <div class="record-table">
     <div class="container px-4">
@@ -40,7 +40,7 @@
       <div class="record-inner">
         <table class="record">
           {{#each records}}
-            <tr>
+            <tr class="record-data">
               <td style="width: 10%;"><i class="{{ this.category }}"></i></td>
               <td style="width: 35%;">{{ this.name }}</td>
               <td style="width: 20%;">{{ this.date }}</td>

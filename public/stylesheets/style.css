@@ -196,7 +196,7 @@
 }
 .record a:hover i:before,
 .record button:hover i:before {
-  color: #dddddd;
+  color: #aaa;
 }
 
 /* new */
@@ -240,7 +240,7 @@
 }
 
 /* form validated */
-.expense-container form.was-validated input:invalid {
+/* .expense-container form.was-validated input:invalid {
   border: 1px solid red;
 }
 .expense-container form.was-validated input:valid {
@@ -251,4 +251,4 @@
 }
 .expense-container form.was-validated select:valid {
   border: 1px solid green;
-}
+} */

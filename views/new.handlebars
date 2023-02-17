@@ -11,18 +11,18 @@
   {{!-- expense form --}}
   <div class="form-container px-5 mt-4">
     {{> message}}
-    <form id="form" action="/expenses" method="POST" novalidate>
+    <form id="form" action="/expenses" method="POST">
       <div class="form-item">
         <i class="fa-solid fa-cart-shopping"></i>
-        <input id="name" type="text" name="name" placeholder="請輸入名稱" required>
+        <input id="name" type="text" name="name" placeholder="請輸入名稱" value="{{ name }}">
       </div>
       <div class="form-item">
         <i class="fa-solid fa-calendar-days"></i>
-        <input id="date" type="date" name="date" required>
+        <input id="date" type="date" name="date">
       </div>
       <div class="form-item">
         <select id="category" name="category" class="form-select form-select-lg mb-3"
-          aria-label=".form-select-lg example" required>
+          aria-label=".form-select-lg example">
           <option selected>類別</option>
           <option value="家居物業" {{#if life}} selected {{/if}}>家居物業</option>
           <option value="交通出行" {{#if traffic}} selected {{/if}}>交通出行</option>
@@ -33,7 +33,7 @@
       </div>
       <div class="form-item">
         <i class="fa-solid fa-dollar-sign"></i>
-        <input id="amount" type="number" name="amount" placeholder="請輸入金額" required>
+        <input id="amount" type="number" name="amount" placeholder="請輸入金額" value="{{ amount }}">
       </div>
       <div class="form-item text-center">
         <button id="submit-button" class="btn btn-primary" type="submit" style="background-color: #EFA3C8;">新增</button>

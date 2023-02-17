@@ -21,7 +21,6 @@ window.addEventListener('load', (e) => {
   recordDatas.forEach(data => {
     const category = data.children[0].children[0].classList[1]
     const amount = Number(data.children[3].innerText.replace('$', ''))
-    console.log(amount);
       if (category === categories[0]) {
         house += amount
       }
@@ -42,16 +41,14 @@ window.addEventListener('load', (e) => {
   const categoryNames = ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他']
   
   new Chart(ctx, {
-    type: 'doughnut',  //圖表類型
+    type: 'doughnut', 
     data: {
-      // 標籤
       labels: categoryNames,
       datasets: [{
-        // 標題
+        // title
         label: '總支出',
-        // 資料
+        // data value
         data: categoryValues,
-        //圖表背景色
         backgroundColor: [
           'rgba(255, 99, 132, 1)',
           'rgba(54, 162, 235, 1)',
@@ -59,7 +56,6 @@ window.addEventListener('load', (e) => {
           'rgba(75, 192, 192, 1)',
           'rgba(255, 159, 64, 1)'
         ],
-        //圖表外框線色
         borderColor: [
           'rgba(0, 0, 0, 1)',
           'rgba(0, 0, 0, 1)',
@@ -67,7 +63,6 @@ window.addEventListener('load', (e) => {
           'rgba(0, 0, 0, 1)',
           'rgba(0, 0, 0, 1)'
         ],
-        // 外框線寬度
         borderWidth: 2
       }]
     },

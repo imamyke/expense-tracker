@@ -14,15 +14,15 @@ router.post('/', (req, res) => {
   Category.find()
     .lean()
     .then(categories => {
-      const TargetCategory = categories.find(category => category.name === req.body.category)
-      // 從這開始
-      if (!TargetCategory) {
-        req.flash('select_msg')
-        res.render('new')
-        return
+      const targetCategory = categories.find(category => category.name === req.body.category)
+      const errors = []
+      const form = req.body
+      if (!form.name || !form.date || !targetCategory || !form.date || !form.amount) {
+        errors.push({ message: '請確認欄位已確實填寫完畢!' })
+        return res.render('new', { ...form, errors})
       }
-      categoryId = TargetCategory._id
-      return Record.create({ ...req.body, categoryId, userId })
+      categoryId = targetCategory._id
+      return Record.create({ ...form, categoryId, userId })
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     })
@@ -30,11 +30,10 @@ router.post('/', (req, res) => {
 })
 // 編輯
 router.get('/:id/edit', (req, res) => {
-  // const userId = req.user._id     
   const _id = req.params.id
   const userId = req.user._id
   Record.findOne({ _id, userId })
-    .lean() // 把資料轉換成單純的 "JS 物件"
+    .lean() 
     .then(record => {
       // 轉換日期格式
       const recordDate = dateValue(record.date)
@@ -54,7 +53,7 @@ router.get('/:id/edit', (req, res) => {
 })
 router.put('/:id', (req, res) => {
   const userId = req.user._id
-  const _id = req.params.id // 字串
+  const _id = req.params.id 
   return Record.findOneAndUpdate({ _id, userId }, req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

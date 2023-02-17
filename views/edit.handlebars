@@ -10,14 +10,14 @@
   </div>
   {{!-- expense form --}}
   <div class="form-container px-5 mt-4">
-    <form id="form" action="/expenses/{{record._id}}?_method=PUT" method="POST" novalidate>
+    <form id="form" action="/expenses/{{record._id}}?_method=PUT" method="POST">
       <div class="form-item">
         <i class="fa-solid fa-cart-shopping"></i>
-        <input id="name" type="text" name="name" placeholder="請輸入名稱" value="{{ record.name }}" required>
+        <input id="name" type="text" name="name" placeholder="請輸入名稱" value="{{ record.name }}">
       </div>
       <div class="form-item">
         <i class="fa-solid fa-calendar-days"></i>
-        <input id="date" type="date" name="date" value="{{ recordDate }}" required>
+        <input id="date" type="date" name="date" value="{{ recordDate }}">
       </div>
       <div class="form-item">
         <select onchange="this.form.submit()" name="category" class="form-select-lg form-select"

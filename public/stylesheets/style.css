@@ -4,7 +4,7 @@
   width: 600px;
   margin: 0 auto;
   box-shadow: 0 3px 30px rgba(0,0,0,0.3);
-  height: 860px;
+  height: 800px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -159,7 +159,7 @@
 }
 .record-inner {
   position: relative;
-  max-height: 280px;
+  max-height: 232px;
   overflow: hidden;
   overflow-y: scroll;
   border-radius: 0  0 10px 10px;

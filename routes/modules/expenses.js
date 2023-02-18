@@ -55,7 +55,7 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
   const _id = req.params.id 
   const userId = req.user._id
-// 從這邊開始
+
   Category.find()
       .lean()
       .then(categories => {

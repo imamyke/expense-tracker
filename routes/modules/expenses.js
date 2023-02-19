@@ -14,15 +14,28 @@ router.post('/', (req, res) => {
   Category.find()
     .lean()
     .then(categories => {
-      const form = req.body
+      const record = req.body
       const errors = []
-      const targetCategory = categories.find(category => category.name === form.category)
-      if (!form.name || !form.date || !targetCategory || !form.amount) {
+      const targetCategory = categories.find(category => category.name === record.category)
+      if (!record.name || !record.date || !targetCategory || !record.amount) {
+        // 導入類別
+        const selected = {
+            '家居物業': false,
+            '交通出行': false,
+            '休閒娛樂': false,
+            '餐飲食品': false,
+            '其他': false
+          }
+        const keySelected = Object.keys(selected).find(key => key === record.category)
+        if (!keySelected) {
+          errors.push({ message: '請確認欄位已確實填寫完畢!' })
+          return res.render('new', { record , errors, keySelected: false })
+        }
         errors.push({ message: '請確認欄位已確實填寫完畢!' })
-        return res.render('new', { ...form, errors})
+        return res.render('new', { record , errors, keySelected })
       }
       categoryId = targetCategory._id
-      return Record.create({ ...form, categoryId, userId })
+      return Record.create({ ...record, categoryId, userId })
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     })
@@ -47,8 +60,7 @@ router.get('/:id/edit', (req, res) => {
             '其他': false
           }
       const keySelected = Object.keys(selected).find(key => key === record.category)
-      selected[`${keySelected}`] = true
-      res.render('edit', { _id ,record, keySelected })
+      res.render('edit', { _id , record, keySelected })
     })
     .catch(error => console.log(error))
 })
@@ -59,11 +71,10 @@ router.put('/:id', (req, res) => {
   Category.find()
       .lean()
       .then(categories => {
-          const form = req.body
+          const record = req.body
           const errors = []
-          const targetCategory = categories.find(category => category.name === form.category)
-          if (!form.name || !form.date || !targetCategory || !form.amount) {
-            const record = form
+          const targetCategory = categories.find(category => category.name === record.category)
+          if (!record.name || !record.date || !targetCategory || !record.amount) {
             // 導入類別
             const selected = {
               '家居物業': false,
@@ -77,11 +88,10 @@ router.put('/:id', (req, res) => {
               errors.push({ message: '請確認欄位已確實填寫完畢!' })
               return res.render('edit', { _id , record, errors, keySelected: false })
             }
-            selected[`${keySelected}`] = true
             errors.push({ message: '請確認欄位已確實填寫完畢!' })
-            return res.render('edit', { _id ,record, keySelected, errors })
+            return res.render('edit', { _id ,record, errors, keySelected })
           }
-        return Record.findOneAndUpdate({ _id, userId }, req.body)
+        return Record.findOneAndUpdate({ _id, userId }, record)
                 .then(() => res.redirect('/'))
                 .catch(error => console.log(error))
       })

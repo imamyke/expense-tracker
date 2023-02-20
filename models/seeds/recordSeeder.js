@@ -53,7 +53,6 @@ db.once('open', () => {
         return categoryId
       }).then(() => {
         for (const [user_index, user] of Object.entries(SEED_USER) ) {
-          console.log(user_index, user);
           bcrypt
           .genSalt(10)
           .then(salt => bcrypt.hash(user.password, salt))
@@ -64,7 +63,6 @@ db.once('open', () => {
           }))
           .then(user => {
             userId = user._id
-            console.log(userId);
             return Record.create({ ...SEED_RECORD, userId, categoryId })
           })
           .then(() => {
@@ -74,7 +72,7 @@ db.once('open', () => {
         }
       })
     }).then(() => {
-      console.log('Yes done.')
+      console.log('All done.')
       process.exit()
     })
 })

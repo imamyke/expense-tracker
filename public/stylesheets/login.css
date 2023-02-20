@@ -49,7 +49,7 @@ p {
 .social-btns{
   position: relative;
 	display: flex;
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 }
 .social-btns__item{
   position: relative;
@@ -172,6 +172,7 @@ p {
 	color: #aaa;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
+	margin-bottom: 8px;
 }
 .signup__form .form .form__item:last-child{
 	margin-top: 10px;

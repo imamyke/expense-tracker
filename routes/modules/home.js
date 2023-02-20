@@ -54,7 +54,6 @@ router.get('/category', (req,res) => {
             '其他': false,
           }
           const keySelected = Object.keys(selected).find(key => key === category)
-          selected[`${keySelected}`] = true
           
           // 計算總金額
           const totalAmount = calculateTotalAmount(defaultRecords)
@@ -68,7 +67,7 @@ router.get('/category', (req,res) => {
             return defaultRecord
           })
           
-          return res.render('index', { records, categories, totalAmount, keySelected })
+          return res.render('index', { records, totalAmount, keySelected })
         })
         .catch(error => console.error(error))
       })

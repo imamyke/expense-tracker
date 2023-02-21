@@ -46,14 +46,7 @@ router.get('/category', (req,res) => {
         .lean()
         .then(categories => {
           // 篩選
-          const selected = {
-            '家居物業': false,
-            '交通出行': false,
-            '休閒娛樂': false,
-            '餐飲食品': false,
-            '其他': false,
-          }
-          const keySelected = Object.keys(selected).find(key => key === category)
+          const keySelected = Object.entries(categories).find(categoryItem => categoryItem[1].name === category)
           
           // 計算總金額
           const totalAmount = calculateTotalAmount(defaultRecords)
@@ -67,7 +60,7 @@ router.get('/category', (req,res) => {
             return defaultRecord
           })
           
-          return res.render('index', { records, totalAmount, keySelected })
+          return res.render('index', { records, totalAmount, keySelected: keySelected[1].name })
         })
         .catch(error => console.error(error))
       })

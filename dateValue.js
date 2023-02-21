@@ -2,7 +2,7 @@ const dateValue = (date) => {
   let day = date.getDate()
   let mounth = date.getMonth() + 1
   let year = date.getFullYear()
-  let formattedDate = ''
+  let dateValue = ''
 
   if (day < 10) {
     day = '0'+ day
@@ -11,8 +11,8 @@ const dateValue = (date) => {
     mounth = '0' + mounth
   }
 
-  formattedDate = year + '-' + mounth + '-' + day
-  return formattedDate
+  dateValue = year + '-' + mounth + '-' + day
+  return dateValue
 }
 
 module.exports = dateValue
